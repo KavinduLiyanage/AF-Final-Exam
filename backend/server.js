@@ -17,6 +17,8 @@ app.use("/users", usersRouter);
 const propertyRouter = require("./routes/propertyRoutes");
 app.use("/property", propertyRouter);
 
+app.use('/uploads', express.static('uploads'));
+
 //MongoDB Connection
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }

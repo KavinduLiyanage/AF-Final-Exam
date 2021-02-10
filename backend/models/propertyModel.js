@@ -7,6 +7,7 @@ const propertySchema = new Schema(
     {
         propertyName: { type: String, required: true, trim: true },
         propertyDescription: { type: String, required: true, trim: true },
+        images: {type: Array, default: [] },
         propertyCategory: { type: String, required: true, trim: true },
         propertyType: { type: String, required: true, trim: true },
         propertyAddress: { type: String, required: true, trim: true },

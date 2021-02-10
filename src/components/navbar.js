@@ -4,7 +4,6 @@ import { isLogin, logout } from "../auth/auth";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
-
     constructor(props) {
         super(props);
 
@@ -18,10 +17,6 @@ class Navbar extends Component {
         this.setState({
             isLogin: false,
         });
-    };
-
-    handleNameClick = () => {
-        window.location = "/users/" + localStorage.getItem(TOKEN_ID);
     };
 
     render() {
@@ -39,7 +34,7 @@ class Navbar extends Component {
                                 <span className="navbar-toggler-icon" />
                             </button>
                             <a className="navbar-brand" href="/">
-                                Home
+                                <b>Real Estate Agent</b>
                             </a>
                             <div
                                 className="collapse navbar-collapse"
@@ -47,24 +42,27 @@ class Navbar extends Component {
                             >
                                 <ul className="navbar-nav">
                                     <li className="nav-item active">
-                                        <a className="nav-link" href="/addProduct">Add Products <span className="sr-only">(current)</span></a>
+                                        <a className="nav-link" href={`/allProperties`}>View all properties<span className="sr-only">(current)</span></a>
                                     </li>
-
                                 </ul>
-
+                                <ul className="navbar-nav">
+                                    <li className="nav-item active">
+                                        <a className="nav-link" href={`/addProperty`}>Add property <span className="sr-only">(current)</span></a>
+                                    </li>
+                                </ul>
+                                <ul className="navbar-nav">
+                                    <li className="nav-item active">
+                                        <a className="nav-link" href={`/myDashboard/${localStorage.getItem(TOKEN_ID)}`}>My properties <span className="sr-only">(current)</span></a>
+                                    </li>
+                                </ul>
                                 <ul className="navbar-nav ml-md-auto">
                                     <li className="nav-item active">
                                         {this.state.isLogin ? (
-                                            <div>
-                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                                <a
-                                                    href="#"
-                                                    className="loged-user-name"
-                                                    onClick={this.handleNameClick}
-                                                >
+                                            <div className="loged-user-div">
+                                                <b className="loged-user-name">
                                                     {" "}
-                                                    {localStorage.getItem(TOKEN_FNAME)}{" "}
-                                                </a>
+                                                    Hi {localStorage.getItem(TOKEN_FNAME)}{" "}
+                                                </b>
                                                 <span className="badge badge-light">
                                                 <Link to="" onClick={() => this.handleLogout()}>
                                                     Logout
@@ -72,7 +70,11 @@ class Navbar extends Component {
                                                     </span>
                                             </div>
                                         ) : (
+                                            <div className="nonLog-user-div">
+                                            <span className="badge badge-light">
                                             <a href="/login">Login</a>
+                                                </span>
+                                            </div>
                                         )}
                                     </li>
                                     <br />

@@ -56,7 +56,7 @@ export default class Login extends React.Component {
         return (
             <div className="container" style={{ maxWidth: "40%"}}>
                 <div className=" h-100">
-                    <h3 align="center">Login</h3>
+                    <h2 align="center"><b>Login</b></h2>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Email address</label>
@@ -75,6 +75,8 @@ export default class Login extends React.Component {
                                    required/>
                         </div>
                         <button type="submit" className="btn btn-primary btn-block">Login</button>
+                        <br/>
+                        <p align="center">Demo credential => Email : sandeepa@gmail.com || Password : 12345</p>
                     </form>
                     <br/>
                     <div className="card-footer">

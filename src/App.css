@@ -1,38 +1,73 @@
-.App {
+.image {
+  position: relative;
+  width: 100%; /* for IE 6 */
+}
+
+.image-onText {
+  position: absolute;
+  top: 200px;
   text-align: center;
+  width: 100%;
+  font: bold 70px Helvetica;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.image-onText2 {
+  position: absolute;
+  top: 300px;
+  text-align: center;
+  width: 100%;
+  font: bold 25px Helvetica;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h2 span {
   color: white;
+  letter-spacing: -1px;
+  /*background: rgb(0, 0, 0); !* fallback color *!*/
+  /*background: rgba(0, 0, 0, 0.4);*/
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-nav{
+  padding-left: 20px;
+  font-size: 18px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-brand{
+  font-size: 22px;
+  padding-left: 50px;
+  padding-right: 150px;
+}
+
+.nav-link {
+  background: rgb(0, 0, 0); /* fallback color */
+  background: rgba(0, 0, 0, 0.4);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.loged-user-div {
+  margin-right: 20px;
+}
+
+.nonLog-user-div {
+  margin-right: 20px;
+}
+
+.loged-user-name{
+  color: aliceblue;
+  margin-right: 20px;
+}
+
+.detail-property-image{
+  max-height: 200px;
+}
+
+.top1 {
+  height:250px;
+  background-color:#FFFFFF;
+  overflow: hidden;
+}
+
+.top1 img {
+  height:100%;
 }

@@ -8,11 +8,11 @@ let Property = require("../models/propertyModel");
 //@route GET
 // Defined get all properties data route
 propertyRoutes.route('/').get(function (req,res) {
-    Property.find(function (err, game) {
+    Property.find(function (err, property) {
         if(err)
             console.log(err);
         else
-            res.json(game);
+            res.json(property);
     });
 });
 
@@ -55,8 +55,8 @@ propertyRoutes.post("/uploadImage", (req, res) => {
 propertyRoutes.route('/add').post(function (req,res) {
     let property = new Property(req.body);
     property.save()
-        .then(game => {
-            res.status(200).json({'game': 'game is added successfully'})
+        .then(property => {
+            res.status(200).json({'property': 'Property is added successfully'})
         })
         .catch(err => {
             res.status(400).send("unable to save to database");
@@ -65,20 +65,20 @@ propertyRoutes.route('/add').post(function (req,res) {
 
 //@route POST
 // Defined get all properties data route
-propertyRoutes.route('/getgames').post(function (req,res) {
+propertyRoutes.route('/getProperties').post(function (req,res) {
     let term = req.body.searchTerm;
     if(term) {
-        Property.find({ gameName: { $regex: term, $options: "i" } })
-            .exec((err, games) => {
+        Property.find({ propertyName: { $regex: term, $options: "i" } })
+            .exec((err, properties) => {
                 if (err) return res.status(400).json({ success: false, err });
-                res.status(200).json({ success: true, games });
+                res.status(200).json({ success: true, properties });
             });
     }
     else {
         Property.find()
-            .exec((err, games) => {
+            .exec((err, properties) => {
                 if (err) return res.status(400).json({ success: false, err });
-                res.status(200).json({ success: true, games });
+                res.status(200).json({ success: true, properties });
             });
     }
 });
@@ -95,17 +95,19 @@ propertyRoutes.route('/edit/:id').get(function (req,res) {
 //@route POST
 // Defined update property details using id
 propertyRoutes.route('/update/:id').post(function (req, res) {
-    Property.findById(req.params.id, function (err, game) {
-        if (!game)
-            res.status(404).send("game is not found");
+    Property.findById(req.params.id, function (err, property) {
+        if (!property)
+            res.status(404).send("property is not found");
         else {
-            game.gameName = req.body.gameName;
-            game.gameDes = req.body.gameDes;
-            game.gamePrice = req.body.gamePrice;
-            game.gameCategory = req.body.gameCategory;
-            game.gameReleaseDate = req.body.gameReleaseDate;
+            property.propertyName = req.body.propertyName;
+            property.propertyDescription = req.body.propertyDescription;
+            property.propertyCategory = req.body.propertyCategory;
+            property.propertyType = req.body.propertyType;
+            property.propertyAddress = req.body.propertyAddress;
+            property.propertyPrice = req.body.propertyPrice;
+            property.propertyContactNumber = req.body.propertyContactNumber;
 
-            game.save().then(game => {
+            property.save().then(property => {
                 res.json('Update Complete');
             })
                 .catch(err => {
@@ -118,10 +120,19 @@ propertyRoutes.route('/update/:id').post(function (req, res) {
 //@route GET
 // Defined delete property using id
 propertyRoutes.route('/delete/:id').get(function (req,res) {
-    Property.findOneAndDelete({_id: req.params.id}, function (err, game) {
+    Property.findOneAndDelete({_id: req.params.id}, function (err, property) {
         if (err)res.json(err);
         else res.json('Successfully removed');
     });
+});
+
+//@route GET
+//@desc Get all products data
+propertyRoutes.route("/:id").get((req, res) => {
+    const userId = req.params.id;
+    Property.find({ userId: { $regex: userId, $options: "i" } })
+        .then((properties) => res.json(properties))
+        .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = propertyRoutes;
